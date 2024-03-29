@@ -82,17 +82,12 @@ def extract_tweets_json_from_id(amount, user_id, max_retries=3, delay=1):
 
     time.sleep(delay)
 
-    print(f"Attempting to fetch tweet #{counter+1} out of {amount}")
-
     return None
 
 def extract_tweet_list_from_tweet_json(tweets_json):
-    print(f"Length of tweet json: {len(tweets_json)}")
-    print(type(tweets_json))
     tweets = []
 
     for dict in tweets_json:
-        print(type(dict))
         tweet = {}
         id = None
         text = None
@@ -122,7 +117,7 @@ def extract_tweet_list_from_tweet_json(tweets_json):
 tweets_json = extract_tweets_json_from_id(26, musky_boi_user_id)
 tweet_list = extract_tweet_list_from_tweet_json(tweets_json)
 print(f"Length of tweet list: {len(tweet_list)}")
-print(tweet_list)
 
 df = pd.DataFrame(tweet_list)
+print(df.head(5))
 df.to_csv("elonmuck.csv", index=False)
